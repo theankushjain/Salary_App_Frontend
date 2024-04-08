@@ -1,0 +1,83 @@
+<div class="bootstrap-wrapper">
+    <div class="container mt">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center">Add/Edit Menu Here!!!</h1>
+
+            <!-- display feedback -->
+            <!-- <div *ngIf="feedback.error" class="container text-center" style="color: red;">{{feedback.error}}</div>
+            <div *ngIf="feedback.success" class="container text-center" style="color: green;">{{feedback.success|json}}</div> -->
+
+            <!-- creating form -->
+
+            <form [formGroup]="addMenuForm" (ngSubmit)="onSubmit()">
+                <div mat-dialog-content class="content">
+                    <div class="row">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label for="name">Menu Name</mat-label>
+                            <input id="name" formControlName="label" type="text" required matInput>
+                            <div *ngIf="f.label.invalid && (f.label.dirty || f.label.touched)" class="text-danger">
+                                <div *ngIf="f.label.errors?.required" style="color: red;"><em>Name of Menu is required.</em>
+                                </div>
+                                <!-- ?signifies safe navigation operator as the error might be null -->
+                                <div *ngIf="f.label.errors?.minlength" style="color: red;"><em>Name of Menu must be at least 3 characters.</em></div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label for="icon">Icon</mat-label>
+                            <input id="icon" formControlName="icon" type="text" matInput>
+                            <div *ngIf="f.icon.invalid && (f.icon.dirty || f.icon.touched)" class="text-danger">
+                                <div *ngIf="f.icon.errors?.required" style="color: red;"><em>Icon of Menu is required.</em>
+                                </div>
+                                <!-- ?signifies safe navigation operator as the error might be null -->
+                                <div *ngIf="f.icon.errors?.minlength" style="color: red;"><em>Icon of Menu must be at least 3 characters.</em></div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field  class="full-width" appearance="outline">
+                            <mat-label for="parent">Parent Menu</mat-label>
+                            <mat-select id="parent" matInput formControlName="parentMenu">
+                                <mat-option *ngFor="let menu of parentMenus" [value]="menu">
+                                  {{menu['label']}}
+                                </mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label for="ordering">Order</mat-label>
+                            <input id="ordering" formControlName="ordering" type="text" required matInput>
+                            <div *ngIf="f.ordering.invalid && (f.ordering.dirty || f.ordering.touched)" class="text-danger">
+                                <div *ngIf="f.ordering.errors?.required" style="color: red;"><em>Order is required.</em>
+                                </div>
+                                <!-- ?signifies safe navigation operator as the error might be null -->
+                                <div *ngIf="f.ordering.errors?.minlength" style="color: red;"><em>Order must be at least 3 characters.</em></div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label for="route">Route Link</mat-label>
+                            <input id="route" formControlName="routeLink" type="text" required matInput>
+                            <div *ngIf="f.routeLink.invalid && (f.routeLink.dirty || f.routeLink.touched)" class="text-danger">
+                                <div *ngIf="f.routeLink.errors?.required" style="color: red;"><em>Name of routeLink is required.</em>
+                                </div>
+                                <!-- ?signifies safe navigation operator as the error might be null -->
+                                <div *ngIf="f.routeLink.errors?.minlength" style="color: red;"><em>Name of routelink must be at least 3 characters.</em></div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                    
+                    <div class="row">
+                        <div mat-dialog-actions class="container text-center action">
+                            <button type="submit" mat-raised-button color="primary">Submit</button>
+                            <button style="margin-left: 10px;" type="reset" mat-raised-button
+                                color="accent">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+    </div>
+</div>

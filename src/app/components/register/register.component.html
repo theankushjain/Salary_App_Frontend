@@ -1,0 +1,77 @@
+<div class="bootstrap-wrapper">
+    <div class="container mt">
+        <div class="col-md-6 offset-md-3">
+            <h1 *ngIf="!data" class="text-center">Register New User Here!!!</h1>
+            <h1 *ngIf="data" class="text-center">Edit Existing User Here!!!</h1>
+
+            <!-- display feedback -->
+            <!-- <div *ngIf="feedback.error" class="container text-center" style="color: red;">{{feedback.error}}</div>
+            <div *ngIf="feedback.success" class="container text-center" style="color: green;">{{feedback.success|json}}</div> -->
+
+            <!-- creating form -->
+
+            <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+                <div mat-dialog-content class="content">
+                    <div class="row">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label for="email">Email ID</mat-label>
+                            <input id="email" placeholder="Ex. abc@xyz.com" formControlName="email" type="email"
+                                required matInput>
+                            <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)" class="text-danger">
+                                <div *ngIf="f.email.errors?.required" style="color: red;"><em>Email is required.</em>
+                                </div>
+                                <div *ngIf="f.email.errors?.email" style="color: red;"><em>Invalid email format.</em>
+                                </div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label for="username">Username</mat-label>
+                            <!-- <input formControlName="username" [(ngModel)]="credentials.name" type="text" required matInput> -->
+                            <input id="username" formControlName="name" type="text" required matInput>
+                            <div *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)" class="text-danger">
+                                <div *ngIf="f.name.errors?.required" style="color: red;"><em>Username is required.</em>
+                                </div>
+                                <!-- ?signifies safe navigation operator as the error might be null -->
+                                <div *ngIf="f.name.errors?.minlength" style="color: red;"><em>Username must be at least 3 characters.</em></div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                    <div *ngIf="!data" class="row">
+                        <mat-form-field  class="full-width" appearance="outline">
+                            <mat-label for="password">Password</mat-label>
+                            <input formControlName="password" type="password" required matInput>
+                            <!-- <input formControlName="password" [(ngModel)]="credentials.password" type="password" required matInput> -->
+                            <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)"
+                                class="text-danger">
+                                <div *ngIf="f.password.errors?.required" style="color: red;"><em>Password is
+                                        required.</em>
+                                </div>
+                                <div *ngIf="f.password.errors?.minlength" style="color: red;"><em>Password must be at
+                                        least
+                                        5 characters.</em></div>
+                            </div>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field  class="full-width" appearance="outline">
+                            <mat-label for="role">Role</mat-label>
+                            <mat-select multiple matInput formControlName="roles">
+                                <mat-option *ngFor="let role of dataSource" [value]="role['name']">
+                                  {{role['name']}}
+                                </mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <div mat-dialog-actions class="container text-center action">
+                            <button type="submit" mat-raised-button color="primary">{{data ? 'Update' : 'Save'}}</button>
+                            <button style="margin-left: 10px;" type="reset" mat-raised-button
+                                color="accent">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+    </div>
+</div>

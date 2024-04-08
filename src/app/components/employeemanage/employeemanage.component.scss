@@ -1,0 +1,71 @@
+
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+}
+
+::ng-deep .mat-form-field-wrapper input {
+  background-color: #fff; /* Replace with your desired color */
+}
+
+.main-body {
+  background: #f4f7fa;
+  padding-top: 20px;  
+  margin: 0 auto;
+  max-width: 1348px;
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.action {
+  display: flex;
+  gap: 5px;
+}
+
+.top-right-button{
+  margin-left: 5px;
+}
+
+.main-body {
+  background: #f4f7fa;
+  padding-top: 20px;
+  margin: 0 auto;
+  max-width: 1348px;
+  
+  @media screen and (max-width: 768px) {
+    max-width: 100%; /* Adjust the width for smaller screens */
+    padding: 10px; /* Adjust padding or margins as needed */
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+/* Adjustments for smaller screens */
+.action {
+  display: flex;
+  gap: 5px;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column; /* Arrange buttons vertically on smaller screens */
+  }
+}
+
+.top-right-button {
+  margin-left: 5px;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+    margin-left: 0;
+    margin-top: 5px;
+    width: 100%;
+  }
+}
+
