@@ -13,7 +13,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
@@ -43,7 +43,11 @@ import { EmployeemanageComponent } from './components/employeemanage/employeeman
 import { RolemanageComponent } from './components/employeemanage/rolemanage/rolemanage.component';
 import { AddRoleComponent } from './components/employeemanage/rolemanage/add-role/add-role.component';
 import { MenumanageComponent } from './components/menumanage/menumanage.component';
-import { AddMenuComponent } from './components/menumanage/add-menu/add-menu.component'
+import { AddMenuComponent } from './components/menumanage/add-menu/add-menu.component';
+import { SalarymanageComponent } from './components/salarymanage/salarymanage.component';
+import { AddSalaryComponent } from './components/salarymanage/add-salary/add-salary.component';
+import { SingleusersalaryComponent } from './components/salarymanage/singleusersalary/singleusersalary.component';
+import { GeneratepayslipComponent } from './components/salarymanage/generatepayslip/generatepayslip.component'
 
 
 @NgModule({
@@ -63,7 +67,11 @@ import { AddMenuComponent } from './components/menumanage/add-menu/add-menu.comp
     RolemanageComponent,
     AddRoleComponent,
     MenumanageComponent,
-    AddMenuComponent
+    AddMenuComponent,
+    SalarymanageComponent,
+    AddSalaryComponent,
+    SingleusersalaryComponent,
+    GeneratepayslipComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +98,7 @@ import { AddMenuComponent } from './components/menumanage/add-menu/add-menu.comp
     MatSortModule,
     MatSnackBarModule,
   ],
-  providers: [LoginService,[{provide : HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}]],
+  providers: [LoginService,[{provide : HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}], { provide: MAT_DIALOG_DATA, useValue: {} }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

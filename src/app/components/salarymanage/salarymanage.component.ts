@@ -1,24 +1,20 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { UsersService } from 'src/app/services/users.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { RegisterComponent } from '../register/register.component';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ExportService } from 'src/app/services/export.service';
-import {MatToolbarModule} from '@angular/material/toolbar';
-// import { CoreService } from './core/core.service';
-
-
+import { UsersService } from 'src/app/services/users.service';
+import { RegisterComponent } from '../register/register.component';
+import {} from '@angular/material';
+import { AddSalaryComponent } from './add-salary/add-salary.component';
+import { SingleusersalaryComponent } from './singleusersalary/singleusersalary.component';
 @Component({
-  selector: 'app-employeemanage',
-  templateUrl: './employeemanage.component.html',
-  styleUrls: ['./employeemanage.component.scss']
+  selector: 'app-salarymanage',
+  templateUrl: './salarymanage.component.html',
+  styleUrls: ['./salarymanage.component.scss']
 })
-export class EmployeemanageComponent implements OnInit, AfterViewInit {
-
+export class SalarymanageComponent {
   displayedColumns: string[] = [
     'id',
     'name',
@@ -46,8 +42,10 @@ export class EmployeemanageComponent implements OnInit, AfterViewInit {
     this.exportService.exportToExcel(this.dataSource.data, 'Users_Data', 'Sheet1');
   }
 
-  openAddEditEmpForm() {
-    const dialogRef = this._dialog.open(RegisterComponent);
+  addNewSalary(data:any ) {
+    const dialogRef = this._dialog.open(AddSalaryComponent,{
+      data
+    });
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {
@@ -57,28 +55,24 @@ export class EmployeemanageComponent implements OnInit, AfterViewInit {
     });
   }
 
-  openEditEmpForm(data: any) {
-    const dialogRef = this._dialog.open(RegisterComponent, {
-      data,
-    })
+  allSalaries(data:any) {
+    const dialogRef = this._dialog.open(SingleusersalaryComponent,{
+      data
+    });
+    dialogRef.afterClosed().subscribe({
+      next: (val) => {
+        if (val) {
+          this.getUsers();
+        }
+      },
+    });
   }
 
-  deleteEmployee(id: number) {
-    this.usersService.deleteUser(id).subscribe({
-      next: (response: any) => {
-        alert("User "+response.name+" deleted successfully.");
-        location.reload();
-      },
-      error: (error) => {
-        console.error('Error during user deletion:', error);
-        alert("Error during user Deletion.")
-      }
-    })
-  }
 
   getUsers() {
     this.usersService.getUser().subscribe(
       (response: any) => {
+        console.log("user's data:",response)
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -110,11 +104,5 @@ export class EmployeemanageComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-
-    // // Custom filter for the 'role' column that maps roles and converts it to string
-    // this.dataSource.filterPredicate = (data: any, filter: string) => {
-    //   const roles = JSON.stringify(data.roles.map((role: { name: string; }) => role.name.toLowerCase()));
-    //   return roles.includes(filter);
-    // };
   }
 }

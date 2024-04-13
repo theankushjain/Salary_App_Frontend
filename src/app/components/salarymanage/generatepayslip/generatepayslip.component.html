@@ -1,0 +1,65 @@
+
+  <div class="container">
+    <div><button class="download-btn" (click)="downloadPdf()">Download PDF</button></div>
+    <div class="container" #payslipContainer>
+        <header>
+            <h1>Payslip</h1>
+        <p>Navodaya Vidyalaya Samiti</p>
+        <p>Deptt. of School Education & Literacy</p>
+        <p>Government of India</p>
+        </header>
+        <main>
+        <div class="employee-info">
+            <p>EmployeeID : 12748374568</p>
+            <p>Employee name : {{user.name}}</p>
+            <p>Date of Joining : 14-08-2020</p>
+            <p>Pay Period : {{salary.month}}, {{salary.year}}</p>
+            <p>Worked Days : {{salary.noOfDaysPresent}}</p>
+            <p>Designation : Marketing Executive</p>
+            <p>Posting: user.posting</p>
+            <p>Basic Pay: {{salary.basicPay}}</p>
+        </div>
+        <div class="earnings-deductions">
+            <div class="earnings">
+            <h2>Allowances</h2>
+            <div class="earnings-item" *ngFor="let allowance of salary.otherAllowances">
+                <p>{{allowance.nameOfAllowance}}</p>
+                <p>{{allowance.amountOfAllowance}}</p>
+            </div>
+            <div class="total-earnings">
+                <p>Total Allowances</p>
+                <p>{{salary.totalAmountAllowances}}</p>
+            </div>
+            <div class="total-earnings">
+                <p>Gross Salary (Basic+Allowances)</p>
+                <p>{{salary.grossSalary}}</p>
+            </div>
+            </div>
+            <div class="deductions">
+            <h2>Deductions</h2>
+            <div class="deductions-item" *ngFor="let deduction of salary.otherDeductions">
+                <p>{{deduction.nameOfDeduction}}</p>
+                <p>{{deduction.amountOfDeduction}}</p>
+            </div>
+            <div class="total-deductions">
+                <p>Total Deductions</p>
+                <p>{{salary.totalAmountDeductions}}</p>
+            </div>
+            </div>
+        </div>
+        <div class="net-pay">
+            <p>Net Salary</p>
+            <p>{{salary.netSalary}}</p>
+        </div>
+        </main>
+    <footer>
+        <br/>
+        <br/>
+      <div class="signatures">
+        <p>Employer Signature</p>
+        <p>Employee Signature</p>
+      </div>
+      <p>This is system generated payslip</p>
+    </footer>
+    </div>
+  </div>

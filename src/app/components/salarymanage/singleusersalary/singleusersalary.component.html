@@ -1,0 +1,110 @@
+<mat-toolbar style="background-color: #f4f7fa;">
+    <span >{{user.name}}</span>
+    <span class="example-spacer"></span>
+    <div>
+    <button mat-raised-button class="top-right-button" (click)="exportToExcel()">
+        DOWNLOAD LIST
+    </button>
+    </div>
+  </mat-toolbar>
+
+  <!-- Reserved for future Location Data -->
+
+  <!-- <div class="filters">
+    <mat-form-field class="form-fields">
+      <mat-label>Type of Institute</mat-label>
+      <mat-select>
+        <mat-option value="all">All</mat-option>
+        <mat-option *ngFor="let country of dataSource.data" [value]="country.country">
+          {{country.country}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="form-fields">
+        <mat-label>RO</mat-label>
+        <mat-select>
+          <mat-option value="all">All</mat-option>
+          <mat-option *ngFor="let country of dataSource.data" [value]="country.country">
+            {{country.country}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="form-fields">
+        <mat-label>JNV</mat-label>
+        <mat-select>
+          <mat-option value="all">All</mat-option>
+          <mat-option *ngFor="let country of dataSource.data" [value]="country.country">
+            {{country.country}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="form-fields">
+        <mat-label>Designation</mat-label>
+        <mat-select>
+          <mat-option value="all">All</mat-option>
+          <mat-option *ngFor="let country of dataSource.data" [value]="country.country">
+            {{country.country}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div> -->
+
+  <div class="main-body">
+
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    </mat-form-field>
+  
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" matSort>
+  
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+          <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+        </ng-container>
+  
+        <!-- Progress Column -->
+        <ng-container matColumnDef="month">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Month </th>
+          <td mat-cell *matCellDef="let row"> {{row.month}}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="year">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Year </th>
+          <td mat-cell *matCellDef="let row"> {{row.year}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="grossSalary">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Gross Salary </th>
+            <td mat-cell *matCellDef="let row"> {{row.grossSalary}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="netSalary">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Net Salary </th>
+            <td mat-cell *matCellDef="let row"> {{row.netSalary}}</td>
+        </ng-container>
+  
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-raised-button class="top-right-button" (click)="generateSlip(row,user)">
+                GENERATE SLIP
+              </button>
+          </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+  
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" [pageIndex]="0" showFirstLastButtons></mat-paginator>
+
+    </div>
+  </div>

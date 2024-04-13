@@ -83,6 +83,7 @@ export class RolemanageComponent implements OnInit, AfterViewInit {
   getRoles() {
     this.rolesService.getRoles().subscribe(
       (response: any) => {
+        console.log("roles:",response)
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
