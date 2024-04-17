@@ -65,6 +65,16 @@
                         </mat-form-field>
                     </div>
                     <div class="row">
+                        <mat-form-field  class="full-width" appearance="outline">
+                            <mat-label for="location">Posted At Location</mat-label>
+                            <mat-select matInput formControlName="currentPostingLocation">
+                                <mat-option *ngFor="let location of locationDataSource" [value]="location['name']">
+                                  {{location['name']}}
+                                </mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
                         <div mat-dialog-actions class="container text-center action">
                             <button type="submit" mat-raised-button color="primary">{{data ? 'Update' : 'Save'}}</button>
                             <button style="margin-left: 10px;" type="reset" mat-raised-button

@@ -40,6 +40,7 @@ export class SingleusersalaryComponent {
       this.user=data;
     }else{
       this.getCurrentUserSalaries();
+      this.user=data;
     }
     
   

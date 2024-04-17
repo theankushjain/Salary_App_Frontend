@@ -23,10 +23,12 @@ export class EmployeemanageComponent implements OnInit, AfterViewInit {
     'id',
     'name',
     'email',
+    'location',
     'role',
     'action'
   ];
   dataSource!: MatTableDataSource<any>;
+  exportData: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -43,7 +45,13 @@ export class EmployeemanageComponent implements OnInit, AfterViewInit {
   }
 
   exportToExcel(): void {
-    this.exportService.exportToExcel(this.dataSource.data, 'Users_Data', 'Sheet1');
+    const exportData = this.dataSource.data.map((user) => ({
+      ID: user.id,
+      NAME: user.name,
+      EMAIL: user.email,
+      CURRENT_POSTING: user.currentPostingLocation?.name || ''
+    }));
+    this.exportService.exportToExcel(exportData, 'Users_Data', 'Sheet1');
   }
 
   openAddEditEmpForm() {
@@ -79,6 +87,7 @@ export class EmployeemanageComponent implements OnInit, AfterViewInit {
   getUsers() {
     this.usersService.getUser().subscribe(
       (response: any) => {
+        console.log(response);
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

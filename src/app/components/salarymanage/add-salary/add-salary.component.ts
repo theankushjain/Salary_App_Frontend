@@ -154,13 +154,13 @@ export class AddSalaryComponent {
       this.salaryService.addNewSalary(this.addSalaryForm.value).subscribe({
         next: (response: any) => {
           console.log("Salary Added Successfully", response)
-          alert("Menu Added Successfully");
+          alert("Salary Added Successfully");
           this.resetForm();
           // location.reload();
         },
         error: (error) => {
-          console.error('Error during Adding Menu:', error);
-          alert("Error during Adding Menu.")
+          console.error('Error during Adding Salary:', error);
+          alert("Error during Adding Salary.")
         }
       })
     }

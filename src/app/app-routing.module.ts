@@ -13,6 +13,7 @@ import { SalarymanageComponent } from './components/salarymanage/salarymanage.co
 import { AddSalaryComponent } from './components/salarymanage/add-salary/add-salary.component';
 import { SingleusersalaryComponent } from './components/salarymanage/singleusersalary/singleusersalary.component';
 import { GeneratepayslipComponent } from './components/salarymanage/generatepayslip/generatepayslip.component';
+import { LocationComponent } from './components/location/location.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,12 @@ const routes: Routes = [
   {
     path:'salary/manage',
     component:SalarymanageComponent,
+    pathMatch:'full',
+    canActivate: [authGuard]
+  },
+  {
+    path:'location/manage',
+    component:LocationComponent,
     pathMatch:'full',
     canActivate: [authGuard]
   },

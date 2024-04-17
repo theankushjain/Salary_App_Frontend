@@ -1,18 +1,16 @@
 <mat-toolbar style="background-color: #f4f7fa;">
-    <span>All Employees</span>
+    <span>All Locations</span>
     <span class="example-spacer"></span>
     <div>
-    <button mat-raised-button class="top-right-button" (click)="openAddEditEmpForm()">
-      ADD EMPLOYEE
+    <button mat-raised-button class="top-right-button" (click)="openAddEditMenuForm()">
+      ADD Location
     </button>
     <button mat-raised-button class="top-right-button" (click)="exportToExcel()">
         DOWNLOAD LIST
     </button>
     </div>
   </mat-toolbar>
-
-  <!-- Reserved for future Location Data -->
-
+  
   <!-- <div class="filters">
     <mat-form-field class="form-fields">
       <mat-label>Type of Institute</mat-label>
@@ -51,9 +49,9 @@
         </mat-select>
       </mat-form-field>
   </div> -->
-
+  
   <div class="main-body">
-
+  
     <mat-form-field>
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
@@ -74,28 +72,34 @@
           <td mat-cell *matCellDef="let row"> {{row.name}}</td>
         </ng-container>
   
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-          <td mat-cell *matCellDef="let row"> {{row.email}}</td>
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> State </th>
+          <td mat-cell *matCellDef="let row"> {{row.state}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="location">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
-          <td mat-cell *matCellDef="let row"> {{row.currentPostingLocation.name}}</td>
+        <ng-container matColumnDef="district">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> District </th>
+            <td mat-cell *matCellDef="let row"> {{row.district}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+            <td mat-cell *matCellDef="let row"> {{row.type}}</td>
+          </ng-container>
+  
+        <ng-container matColumnDef="parentLocation">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Parent Location </th>
+          <td mat-cell *matCellDef="let row">{{row.parent?row.parent.name:''}}</td>
         </ng-container>
   
-        <ng-container matColumnDef="role">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
-          <td mat-cell *matCellDef="let row"> <span *ngFor="let role of row.roles; let last = last">{{role.name}}{{ !last ? ', ' : '' }}</span></td>
-        </ng-container>
   
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
           <td mat-cell *matCellDef="let row">
-            <button mat-icon-button color="primary" (click)="openEditEmpForm(row)">
+            <button mat-icon-button color="primary" (click)="openEditLocationForm(row)">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button color="warn" (click)="deleteEmployee(row.id)">
+            <button mat-icon-button color="warn" (click)="deleteLocation(row.id)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>
@@ -111,6 +115,6 @@
       </table>
   
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" [pageIndex]="0" showFirstLastButtons></mat-paginator>
-
+  
     </div>
   </div>

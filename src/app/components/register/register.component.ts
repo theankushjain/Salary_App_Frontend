@@ -6,6 +6,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { RegisterService } from 'src/app/services/register.service';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { LocationService } from 'src/app/services/location.service';
 
 @Component({
   selector: 'app-register',
@@ -16,27 +17,37 @@ export class RegisterComponent implements OnInit {
 
   registrationForm: FormGroup;
   dataSource!: [];
+  locationDataSource!:[];
 
-  constructor(private fb: FormBuilder, private router:Router, private registerService: RegisterService, private usersService:UsersService, private rolesService: RolesService, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(private fb: FormBuilder, private router:Router, private registerService: RegisterService, private usersService:UsersService, private rolesService: RolesService, private locationService:LocationService, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.registrationForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(5)]],
-      roles: [[], [Validators.required]]
+      roles: [[], [Validators.required]],
+      currentPostingLocation: ['',[Validators.required]]
     });
   }
 
   ngOnInit(): void {
+    console.log(this.data);
     this.getRoles();
+    this.getLocations();
 
     const rolesData = this.data?.roles || [];
+    const locationData = this.data?.currentPostingLocation || '';
 
     // Map the roles array to an array of role names (strings)
-    const roleNames = rolesData.map((role: { name: any; }) => role.name)
+    const roleNames = rolesData.map((role: { name: any; }) => role.name);
+    const locationName = locationData.name;
+    console.log('location=',locationName);
+    console.log(roleNames);
 
     this.registrationForm.patchValue({
       ...this.data,
-      roles: roleNames
+      roles: roleNames,
+      currentPostingLocation: locationName,
+      password: "12345"
     });
   }
 
@@ -47,13 +58,18 @@ export class RegisterComponent implements OnInit {
     if (this.registrationForm.invalid) {
       return;
     }
+    console.log("sent data:", this.registrationForm.value);
+    const formData = {
+      ...this.registrationForm.value,
+      currentPostingLocation: this.registrationForm.get('currentPostingLocation')?.value
+    };
 
     if (this.data) {
-      this.usersService.updateUser(this.data.id,this.registrationForm.value).subscribe({
+      this.usersService.updateUser(this.data.id,formData).subscribe({
         next: (response: any) => {
           alert("User Updated Successfully");
-          this.resetForm();
-          location.reload();
+          // this.resetForm();
+          // location.reload();
         },
         error: (error) => {
           console.error('Error during user updation:', error);
@@ -61,13 +77,13 @@ export class RegisterComponent implements OnInit {
         }
       })
     } else {
-
-      this.registerService.saveCredentials(this.registrationForm.value).subscribe({
+      console.log("Data sent:",formData);
+      this.registerService.saveCredentials(formData).subscribe({
         next: (response: any) => {
           console.log("User Registration Successful", response)
           alert("User Registration Successful. You can now log in using the Email and Password provided by you.");
-          this.resetForm();
-          location.reload();
+          // this.resetForm();
+          // location.reload();
           
         },
         error: (error) => {
@@ -86,6 +102,17 @@ export class RegisterComponent implements OnInit {
       control = this.registrationForm.controls[name];
       control.setErrors(null);
     });
+  }
+
+  getLocations() {
+    this.locationService.getLocations().subscribe(
+      (response: any) => {
+        this.locationDataSource = response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   getRoles() {

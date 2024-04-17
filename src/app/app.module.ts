@@ -47,7 +47,9 @@ import { AddMenuComponent } from './components/menumanage/add-menu/add-menu.comp
 import { SalarymanageComponent } from './components/salarymanage/salarymanage.component';
 import { AddSalaryComponent } from './components/salarymanage/add-salary/add-salary.component';
 import { SingleusersalaryComponent } from './components/salarymanage/singleusersalary/singleusersalary.component';
-import { GeneratepayslipComponent } from './components/salarymanage/generatepayslip/generatepayslip.component'
+import { GeneratepayslipComponent } from './components/salarymanage/generatepayslip/generatepayslip.component';
+import { LocationComponent } from './components/location/location.component';
+import { AddLocationComponent } from './components/location/add-location/add-location.component'
 
 
 @NgModule({
@@ -71,7 +73,9 @@ import { GeneratepayslipComponent } from './components/salarymanage/generatepays
     SalarymanageComponent,
     AddSalaryComponent,
     SingleusersalaryComponent,
-    GeneratepayslipComponent
+    GeneratepayslipComponent,
+    LocationComponent,
+    AddLocationComponent
   ],
   imports: [
     BrowserModule,

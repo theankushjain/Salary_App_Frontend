@@ -1,0 +1,64 @@
+<div class="bootstrap-wrapper">
+    <div class="container mt">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center">Add/Edit Location Here!!!</h1>
+
+            <!-- display feedback -->
+            <!-- <div *ngIf="feedback.error" class="container text-center" style="color: red;">{{feedback.error}}</div>
+            <div *ngIf="feedback.success" class="container text-center" style="color: green;">{{feedback.success|json}}</div> -->
+
+            <!-- creating form -->
+
+            <form [formGroup]="addLocationForm" (ngSubmit)="onSubmit()">
+                <div mat-dialog-content class="content">
+                    <div class="row">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label for="name">Location Name</mat-label>
+                            <input id="name" formControlName="name" type="text" required matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label for="state">State</mat-label>
+                            <input id="state" formControlName="state" type="text" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label for="district">District</mat-label>
+                            <input id="district" formControlName="district" type="text" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field class="full-width" appearance="outline">
+                            <mat-label for="type">Type</mat-label>
+                            <mat-select id="type" formControlName="type" matInput>
+                                <mat-option value="Headquarter">Headquarter</mat-option>
+                                <mat-option value="Regional Office">Regional Office</mat-option>
+                                <mat-option value="Vidyalaya">Vidyalaya</mat-option>
+                                <mat-option value="NLI">NLI</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+                        <mat-form-field  class="full-width" appearance="outline">
+                            <mat-label for="parent">Parent Location</mat-label>
+                            <mat-select id="parent" matInput formControlName="parentLocation">
+                                <mat-option *ngFor="let location of parentLocations" [value]="location['name']">
+                                  {{location['name']}}
+                                </mat-option>
+                              </mat-select>
+                        </mat-form-field>
+                    </div>
+                    
+                    <div class="row">
+                        <div mat-dialog-actions class="container text-center action">
+                            <button type="submit" mat-raised-button color="primary">Submit</button>
+                            <button style="margin-left: 10px;" type="reset" mat-raised-button
+                                color="accent">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+    </div>
+</div>
