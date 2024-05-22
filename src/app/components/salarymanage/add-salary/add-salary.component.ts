@@ -156,7 +156,7 @@ export class AddSalaryComponent {
           console.log("Salary Added Successfully", response)
           alert("Salary Added Successfully");
           this.resetForm();
-          // location.reload();
+          location.reload();
         },
         error: (error) => {
           console.error('Error during Adding Salary:', error);

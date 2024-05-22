@@ -36,17 +36,8 @@
         <mat-label>JNV</mat-label>
         <mat-select>
           <mat-option value="all">All</mat-option>
-          <mat-option *ngFor="let country of dataSource.data" [value]="country.country">
-            {{country.country}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class="form-fields">
-        <mat-label>Designation</mat-label>
-        <mat-select>
-          <mat-option value="all">All</mat-option>
-          <mat-option *ngFor="let country of dataSource.data" [value]="country.country">
-            {{country.country}}
+          <mat-option *ngFor="let user of dataSource.data" [value]="user.currentPostingLocation.name">
+            {{user.currentPostingLocation.name}}
           </mat-option>
         </mat-select>
       </mat-form-field>

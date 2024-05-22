@@ -23,6 +23,8 @@ export class SalarymanageComponent {
     'action'
   ];
   dataSource!: MatTableDataSource<any>;
+  currentUser:any;
+  postingOfCurrentUser: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -32,7 +34,7 @@ export class SalarymanageComponent {
     private usersService: UsersService,
     private exportService: ExportService
     // private _coreService: CoreService
-  ) { this.getUsers(); }
+  ) { this.getUsers(); this.getCurrentUser(); }
 
   ngOnInit(): void {
     
@@ -53,6 +55,19 @@ export class SalarymanageComponent {
         }
       },
     });
+  }
+
+  getCurrentUser(){
+    this.usersService.getCurrentUser().subscribe(
+      (response: any) => {
+        console.log("Current User:",response)
+        this.currentUser=response;
+        this.postingOfCurrentUser=this.currentUser.currentPostingLocation;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   allSalaries(data:any) {

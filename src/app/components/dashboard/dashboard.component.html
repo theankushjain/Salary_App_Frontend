@@ -7,7 +7,19 @@
     <div class="container text-center mt"> 
         <h1>Welcome to Admin Panel !!!</h1>
         <button (click)="getUsers()" mat-raised-button>Get Details</button>
-        <button (click)="getRoles()" mat-raised-button>Get Roles</button>
     </div>
+    <div class="charts-container">
+        <div class="chart-tile">
+          <canvas baseChart
+            [data]="roleChartData"
+            [labels]="roleChartLabels"
+            [type]="'pie'">
+          </canvas>
+        </div>
+        <canvas baseChart [data]="currentLevelData" [labels]="currentLevelLabels" [type]="'pie'"
+            (chartClick)="onChartClick($event)">
+        </canvas>
+        <!-- Add more chart tiles as needed -->
+      </div>
    
 </div>

@@ -49,7 +49,8 @@ import { AddSalaryComponent } from './components/salarymanage/add-salary/add-sal
 import { SingleusersalaryComponent } from './components/salarymanage/singleusersalary/singleusersalary.component';
 import { GeneratepayslipComponent } from './components/salarymanage/generatepayslip/generatepayslip.component';
 import { LocationComponent } from './components/location/location.component';
-import { AddLocationComponent } from './components/location/add-location/add-location.component'
+import { AddLocationComponent } from './components/location/add-location/add-location.component';
+import { NgChartsModule } from 'ng2-charts'
 
 
 @NgModule({
@@ -101,6 +102,7 @@ import { AddLocationComponent } from './components/location/add-location/add-loc
     MatPaginatorModule,
     MatSortModule,
     MatSnackBarModule,
+    NgChartsModule,
   ],
   providers: [LoginService,[{provide : HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}], { provide: MAT_DIALOG_DATA, useValue: {} }],
   bootstrap: [AppComponent]

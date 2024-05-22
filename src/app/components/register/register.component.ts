@@ -68,8 +68,8 @@ export class RegisterComponent implements OnInit {
       this.usersService.updateUser(this.data.id,formData).subscribe({
         next: (response: any) => {
           alert("User Updated Successfully");
-          // this.resetForm();
-          // location.reload();
+          this.resetForm();
+          location.reload();
         },
         error: (error) => {
           console.error('Error during user updation:', error);
@@ -82,8 +82,8 @@ export class RegisterComponent implements OnInit {
         next: (response: any) => {
           console.log("User Registration Successful", response)
           alert("User Registration Successful. You can now log in using the Email and Password provided by you.");
-          // this.resetForm();
-          // location.reload();
+          this.resetForm();
+          location.reload();
           
         },
         error: (error) => {

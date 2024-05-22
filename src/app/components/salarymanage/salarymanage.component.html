@@ -89,7 +89,7 @@
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
           <td mat-cell *matCellDef="let row">
-            <button mat-raised-button class="top-right-button" (click)="addNewSalary(row)">
+            <button mat-raised-button *ngIf="postingOfCurrentUser?.id==row.currentPostingLocation?.id" class="top-right-button" (click)="addNewSalary(row)">
                 ADD NEW SALARY
               </button>
             <button mat-raised-button class="top-right-button" (click)="allSalaries(row)">

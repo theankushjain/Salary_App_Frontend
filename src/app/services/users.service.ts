@@ -22,4 +22,8 @@ export class UsersService {
   getUser(){
     return this.http.get(`${this.serverUrl}/auth/users`)
   }
+
+  getCurrentUser(){
+    return this.http.get(`${this.serverUrl}/auth/currentUser`)
+  }
 }
